@@ -41,7 +41,7 @@ export interface VueReactiveListener {
   naturalHeight: number;
   naturalWidth: number;
   options: VueLazyloadOptions;
-  rect: DOMRect;
+  rect: any;
   $parent: Element
   elRenderer: Function;
   performanceData: {
