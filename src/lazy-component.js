@@ -44,7 +44,8 @@ export default (lazy) => {
       checkInView () {
         this.getRect()
 
-        const observeBottom = (this.lazyOptions) ? this.rect.bottom > 0 : true
+        const observeBottom = (this.lazyOptions.lazyComponentOptions.observeBottom) ?
+          this.rect.bottom > 0 : true
         return inBrowser &&
                     (this.rect.top < window.innerHeight * lazy.options.preLoad && observeBottom) &&
                     (this.rect.left < window.innerWidth * lazy.options.preLoad && this.rect.right > 0)
