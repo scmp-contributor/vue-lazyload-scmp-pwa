@@ -161,18 +161,23 @@ export default function (Vue) {
     * update image src
     * @param  {DOM} el
     * @param  {object} vue directive binding
+    * @param  {object}
     * @return
     */
-    update (el, binding) {
+    update (el, binding, vnode) {
       let { src, loading, error } = this._valueFormatter(binding.value)
       src = getBestSelectionFromSrcset(el, this.options.scale) || src
 
       const exist = find(this.ListenerQueue, item => item.el === el)
-      exist && exist.update({
-        src,
-        loading,
-        error
-      })
+      if (!exist) {
+        this.add(el, binding, vnode)
+      } else {
+        exist.update({
+          src,
+          loading,
+          error
+        })
+      }
       if (this._observer) {
         this._observer.unobserve(el)
         this._observer.observe(el)
